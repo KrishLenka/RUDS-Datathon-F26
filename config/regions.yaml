@@ -1,0 +1,57 @@
+# Balancing authorities (BAs) included in the datathon, and the NOAA GHCNh
+# weather stations used to represent each one.
+#
+# Why multiple stations? A BA covers many states. Demand responds to weather
+# where *people* are, so we pick airport stations in the largest load centers
+# and give them weights roughly proportional to metro population. Participants
+# are free to (and encouraged to) improve this mapping.
+#
+# Station IDs are GHCN identifiers. Look up others at:
+#   https://www.ncei.noaa.gov/maps/hourly/
+# If a station ID fails to download, the fetch script logs it and continues.
+
+date_range:
+  start: "2023-01-01"   # inclusive, UTC
+  end:   "2025-12-31"   # inclusive, UTC
+
+regions:
+  PJM:
+    name: PJM Interconnection (Mid-Atlantic + parts of Midwest)
+    timezone: America/New_York
+    stations:
+      - {id: USW00013739, name: Philadelphia Intl, weight: 0.30}
+      - {id: USW00094846, name: Chicago O'Hare,    weight: 0.30}
+      - {id: USW00093721, name: Baltimore-Washington Intl, weight: 0.20}
+      - {id: USW00014734, name: Newark Liberty,    weight: 0.20}
+
+  ERCO:
+    name: ERCOT (most of Texas)
+    timezone: America/Chicago
+    stations:
+      - {id: USW00012960, name: Houston Intercontinental, weight: 0.40}
+      - {id: USW00003927, name: Dallas-Fort Worth Intl,   weight: 0.40}
+      - {id: USW00013904, name: Austin-Bergstrom,         weight: 0.20}
+
+  CISO:
+    name: California ISO
+    timezone: America/Los_Angeles
+    stations:
+      - {id: USW00023174, name: Los Angeles Intl,   weight: 0.50}
+      - {id: USW00023234, name: San Francisco Intl, weight: 0.25}
+      - {id: USW00023232, name: Sacramento Exec,    weight: 0.25}
+
+  NYIS:
+    name: New York ISO
+    timezone: America/New_York
+    stations:
+      - {id: USW00094789, name: New York JFK,  weight: 0.70}
+      - {id: USW00014735, name: Albany Intl,   weight: 0.15}
+      - {id: USW00014733, name: Buffalo Niagara, weight: 0.15}
+
+  ISNE:
+    name: ISO New England
+    timezone: America/New_York
+    stations:
+      - {id: USW00014739, name: Boston Logan, weight: 0.60}
+      - {id: USW00014740, name: Hartford Bradley, weight: 0.25}
+      - {id: USW00014745, name: Concord NH, weight: 0.15}
